@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NoteBookApplication {
+public class HabitApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NoteBookApplication.class, args);
+		SpringApplication.run(HabitApplication.class, args);
 	}
 
 }

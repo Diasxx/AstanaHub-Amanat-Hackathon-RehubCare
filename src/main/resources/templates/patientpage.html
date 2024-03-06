@@ -72,26 +72,69 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        #btndel {
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+
+            box-shadow: 0 4px 4px rgba(0,0,0,.1);
+        }
+
+        #btnchange {
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+        }
+
         a {
             color: #fff;
             text-decoration: none;
             box-shadow: 0 4px 4px rgba(0,0,0,.1);
         }
     </style>
-    <title>My Notebook</title>
+    <title>DigitalCare</title>
 </head>
 <body>
 <header>
-    <h1>My Notebook</h1>
+    <h1>DigitalCare</h1>
 </header>
+<br>
 <div class="container">
-    <form id="note-form" th:action="@{'/updatehabit'}" method="post">
-        <input type="hidden" name="habit_id" th:value="${habit.id}">
-        <input type="text" id="note-title" placeholder="Title" name="habit_title" th:value="${habit.title}">
-        <input  type="text" id="note-content" name="habit_desc" th:value="${habit.description}">
-        <input  type="text" id="habit_quantity" name="habit_quantity" th:value="${habit.quantity}">
-        <button type="submit" id="btnadd" style="background-color: #E74C3C">Сохранить</button>
-    </form>
+    <br>
+    <h1 style="color: #E74C3C;">28 Ноября</h1>
+    <br>
+
+    <div th:each="h : ${Habits}">
+        <ul id="note-list">
+            <input type="hidden" name="id" th:value="${h.id}">
+            <h3 th:text="${h.title}"></h3>
+            <p th:text="'Количество: '+${h.quantity_count}+' / '+${h.quantity}"></p>
+            <p th:text="${h.description}"></p>
+
+            <form class="note-actions" th:action="@{'/chechallhabit'}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${h.id}">
+                <button type="submit" id="btndel" style="background-color: #ff4c3c;">Сделано</button>
+            </form>
+
+            <form class="note-actions" th:action="@{'/chechhabit'}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${h.id}">
+                <button type="submit" id="btnchange" style="background-color: #ff4c3c;">
+                    <a>+</a>
+                </button>
+            </form>
+
+        </ul>
+        <br>
+    </div>
+
 </div>
 </body>
 </html>
